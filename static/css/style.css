@@ -1,0 +1,193 @@
+/* Custom colors
+-------------------------------------------------- */
+body{
+  background-color: #F9F9F9;
+  color: #555459;
+}
+.navbar-default {
+    background-color: #fff;
+    border-color: #f3f3f3;
+}
+.footer{
+    background-color: #fff;
+}
+/* -------------------------------------------------- */
+
+
+/* quick and dirty
+-------------------------------------------------- */
+.container-fluid{
+    max-width: 60%;
+}
+.outer_wrap{
+    padding-top: 100px;
+}
+.login_first{
+    margin:0;
+    text-align:center;
+    padding-bottom: 20px;
+}
+.login_second{
+    margin:0;
+    padding-bottom:25px;
+    text-align:center;
+}
+.login_third{
+    margin:0;
+    text-align:center;
+    padding-bottom: 25px;
+}
+.go_button{
+    width: 100%;
+}
+.last{
+    padding-top: 15px;
+}
+#stay_label{
+    padding-left: 10px;
+    font-weight: 600px;
+}
+#message_login{
+    max-width: 45%;
+    margin: auto;
+    padding-top: 20px;
+}
+#message_list{
+    max-width: 60%;
+    margin: auto;
+}
+
+/* -------------------------------------------------- */
+
+
+#left_pencil {
+    padding-right: 5px;
+    text-decoration: none;
+}
+.todo_remove {
+    cursor: pointer;
+}
+
+.logform {
+    background-color:#FFF;
+    padding: 35px 105px 40px 105px;
+    max-width: 45%;
+    margin: auto;
+
+    border-radius: 3px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05)
+}
+
+.todolist, .insform{
+    background-color:#FFF;
+    padding:20px 20px 10px 20px;
+    max-width: 60%;
+    margin: auto;
+
+    border-radius: 3px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05)
+}
+.todolist h1, .insform h1 {
+    margin:0;
+    padding-bottom:20px;
+    text-align:center;
+}
+.todolist {
+    margin-bottom: 50px;
+}
+/*.form-control{
+    border-radius:0;
+}*/
+li.ui-state-default{
+    background:#fff;
+    border:none;
+    border-bottom:1px solid #ddd;
+}
+
+li.ui-state-default:last-child{
+    border-bottom:none;
+}
+
+.todo-footer{
+    background-color:#F4FCE8;
+    margin:0 -20px -10px -20px;
+    padding: 10px 20px;
+}
+.navbar_button{
+    box-shadow: inset 0 0 0 2px #404B55;
+    border-radius: 4px;
+    padding: 8px 10px;
+}
+.navbar-brand{
+    padding: 15px 5px 15px 15px;
+    font-weight: 600;
+    color: #606060;
+}
+.errorTxtContainer{
+    padding: 0px 0px 10px 1px;
+    color: #a94442;
+}
+li > a {
+    font-weight: 700;
+}
+
+@media (max-width: 1300px) {
+    .outer_wrap{ padding-top: 50px; }
+}
+@media screen and (max-width: 1024px) {
+    .logform, #message_login{
+        max-width: 60%;
+    }
+    .logform {padding: 35px 65px 40px 65px;}
+}
+@media screen and (max-width: 730px) {
+    .logform, #message_login{
+        max-width: 90%;
+    }
+    .container-fluid {
+        max-width: 80%;
+    }
+    .newTask {
+        max-width: 85%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .todolist, .insform, .logform, #message_login, #message_list, .container-fluid{
+        max-width: 100%;
+    }
+    .outer_wrap{
+        padding-top: 5px;
+    }
+    .logform {
+        padding: 20px 20px 10px 20px;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .logform{
+        padding: 20px 10px 10px 10px;
+    }
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #fff;
+}
+.container .text-muted {
+  margin: 20px 0;
+}

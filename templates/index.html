@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+{#    <link rel="stylesheet", href="/static/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet", href="/static/css/style.css">
+</head>
+<body>
+    <div class="container outer_wrap">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="todolist box-shadow">
+                    <h1>TodoList</h1>
+                    <hr>
+                    <p></p>
+                    <input style="border-color: #5cb85c" type="text" name="todo_content" id="todo_content" placeholder="快速创建一个Todo任务·" class="form-control add-todo" required />
+                    <hr>
+                    <ul class="list-unstyled">
+                        {% if todolist %}
+                            {% for todo in todolist %}
+                                <li class="ui-state-default">
+                                    <div class="checkbox">
+                                        <label class="newTask" style="padding-left: 10px">
+                                            <b style="cursor: default">{{ todo.content }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: default">{{ todo.pubTime }}</i>
+                                        </label>
+                                        <div class="pull-right" style="padding-right: 10px">
+                                            <a id="{{ todo.id }}@{{ todo.content }}" class="todo_edit" data-toggle="modal">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: #66afe9"></i>
+                                            </a>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <a id="{{ todo.id }}" class="todo_remove">
+                                                <i class="fa fa-trash" aria-hidden="true" style="color: #c9302c"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					编辑修改Todo任务
+				</h4>
+			</div>
+			<div class="modal-body">
+                <label for="edit_content"></label>
+				<input type="text" id="edit_content" value="" class="form-control add-todo" required>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="submit_content">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    </div>
+<script src="/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#todo_content").keydown(function (e) {
+            if(e.keyCode ==13){
+                $.ajax({
+                    url:"/todo/add/",
+                    type:"POST",
+                    dataType:"json",
+                    data:{"content": $("#todo_content").val()},
+                    success:function (data) {
+                        console.log(data);
+                        console.log(data.status);
+                        console.log(data.message);
+                        window.location.href=""
+                    }
+
+                })
+            }
+        });
+    $(".todo_remove").on("click",function () {
+        var tmp = $(this);
+        var url = "/todo/delete/"+$(this).attr("id")+"/";
+        $.ajax({
+            url:url,
+            type:"GET",
+            success:function (data) {
+                console.log(data.status);
+                if(data.status===10003){
+                tmp.parent().parent().parent().hide("slow",function () {
+                    tmp.remove()
+                });
+            }
+            }
+        })
+    });
+    $(".todo_edit").on("click",function () {
+        $("#myModal").modal("show");
+        var old_data = $(this).attr("id").split("@");
+        console.log(old_data);
+        var todo_id = old_data[0];
+        var content = old_data[1];
+        $("#edit_content").attr("value",content);
+        $("#submit_content").on("click",function () {
+            $.ajax({
+                url:"/todo/edit/",
+                type:"POST",
+                dataType:"json",
+                data:{"id":todo_id,"content": $("#edit_content").val()},
+                success:function (data) {
+                    console.log(data);
+                    console.log(data.status);
+                    console.log(data.message);
+                    if(data.status === 10005){
+                        window.location.href=""
+                    }
+                }
+            })
+        })
+    })
+});
+
+
+</script>
+</body>
+</html>
